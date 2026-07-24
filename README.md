@@ -135,7 +135,7 @@ The system compares movie metadata and recommends movies with the highest simila
   <tr>
     <td align="center">
       <h3>🏠 Home Page</h3>
-      <img src="screenshoots/SearchPage.jpg" alt="Home Page" width="450"/>
+      <img src="screenshoots/searchpage.jpg" alt="Home Page" width="450"/>
     </td>
     <td align="center">
       <h3>🎬 Movie Details Page</h3>
