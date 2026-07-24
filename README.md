@@ -129,23 +129,24 @@ The system compares movie metadata and recommends movies with the highest simila
 
 ## 📸 Project Screenshots
 
+## 📸 Application Screenshots
+
 <table align="center">
   <tr>
     <td align="center">
-      <b>🏠 Movie Page</b><br><br>
-      <img src="screenshoots/MoviePage.jpg" alt="Home Page" width="450">
+      <h3>🏠 Home Page</h3>
+      <img src="screenshoots/SearchPage.jpg" alt="Home Page" width="450"/>
     </td>
     <td align="center">
-      <b>🔍 Home Page</b><br><br>
-      <img src="screenshoots/search%20page.jpg" alt="Search Page" width="450">
+      <h3>🎬 Movie Details Page</h3>
+      <img src="screenshoots/MoviePage.jpg" alt="Movie Details Page" width="450"/>
     </td>
   </tr>
 
   <tr>
     <td colspan="2" align="center">
-      <br>
-      <b>🎬 Movie Recommendation Results</b><br><br>
-      <img src="screenshoots/Recommendation%20Page.jpg" alt="Recommendation Page" width="900">
+      <h3>⭐ Recommendation Results</h3>
+      <img src="screenshoots/RecommendationPage.jpg" alt="Recommendation Results" width="900"/>
     </td>
   </tr>
 </table>
