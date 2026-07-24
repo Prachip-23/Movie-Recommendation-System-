@@ -180,6 +180,7 @@ This project is developed for educational purposes.
 ## 👩‍💻 Author
 
 **Prachi R. Patel**
+
 **Aditi Parmar**
 
 If you like this project, don't forget to ⭐ the repository.
