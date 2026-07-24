@@ -133,11 +133,11 @@ The system compares movie metadata and recommends movies with the highest simila
   <tr>
     <td align="center">
       <b>🏠 Home Page</b><br><br>
-      <img src="screenshots/MoviePage.jpg" alt="Home Page" width="450">
+      <img src="screenshoots/MoviePage.jpg" alt="Home Page" width="450">
     </td>
     <td align="center">
       <b>🔍 Search Page</b><br><br>
-      <img src="screenshots/search%20page.jpg" alt="Search Page" width="450">
+      <img src="screenshoots/search%20page.jpg" alt="Search Page" width="450">
     </td>
   </tr>
 
@@ -145,7 +145,7 @@ The system compares movie metadata and recommends movies with the highest simila
     <td colspan="2" align="center">
       <br>
       <b>🎬 Movie Recommendation Results</b><br><br>
-      <img src="screenshots/Recommendation%20Page.jpg" alt="Recommendation Page" width="900">
+      <img src="screensho0ts/Recommendation%20Page.jpg" alt="Recommendation Page" width="900">
     </td>
   </tr>
 </table>
