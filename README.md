@@ -126,9 +126,6 @@ The system compares movie metadata and recommends movies with the highest simila
 ---
 
 ## 📸 Screenshot
-
-## 📸 Project Screenshots
-
 ## 📸 Application Screenshots
 
 <table align="center">
