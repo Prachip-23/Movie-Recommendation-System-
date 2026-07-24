@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommendations</title>
+
+    <!-- ✅ FIX: static path -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/result.css') }}" />
+
+    <style>
+        body {
+            background-color: #141414;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        hr {
+            display: none;
+        }
+
+        h1 {
+            border: none !important;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 12px;
+            left: 20px;
+
+            padding: 8px 14px;
+            font-size: 14px;
+
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            border-radius: 6px;
+
+            backdrop-filter: blur(6px);
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .page {
+            padding: 10px 20px 10px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 20px 0;
+
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.3),
+                0 0 25px rgba(255,255,255,0.2),
+                0 5px 15px rgba(0,0,0,0.9);
+
+            animation: titleFade 1s ease;
+        }
+
+        @keyframes titleFade {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .movies-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .movie-card {
+            width: 200px;
+            text-align: center;
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 10px;
+
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+
+            animation: fadeInUp 0.9s ease forwards;
+            opacity: 0;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            transition: transform 0.6s ease;
+        }
+
+        .movie-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .movie-title {
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+            word-wrap: break-word;
+            transition: color 0.5s ease;
+        }
+
+        .movie-card:hover .movie-title {
+            color: #e50914;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .movie-card:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .movie-card:nth-child(even) {
+            animation-delay: 0.4s;
+        }
+
+        /* ✅ NEW: no results message (only shown if needed) */
+        .no-results {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 18px;
+            color: #bbb;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<a href="/">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+<div class="page">
+    <h1>Recommended Movies</h1>
+
+    {% if titles|length == 0 %}
+        <!-- ✅ FIX: handle no results -->
+        <div class="no-results">
+            😕 No recommendations found. Try another movie.
+        </div>
+    {% else %}
+
+    <div class="movies-container">
+
+        {% for i in range(titles|length) %}
+
+        <div class="movie-card">
+
+            <!-- ✅ FIX: safe URL encoding -->
+            <a href="/movie/{{ titles[i] | urlencode }}">
+                <img src="{{ images[i] }}" alt="movie poster">
+            </a>
+
+            <div class="movie-title">
+                {{ titles[i] }}
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+</div>
+
+</body>
+</html>

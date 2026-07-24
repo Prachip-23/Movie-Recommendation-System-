@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
+
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .search-box {
+            margin-top: 30px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 320px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f6121d;
+        }
+
+        /* ✅ suggestion box styling (minimal add) */
+        #suggestions div {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #333;
+            background: #1f1f1f;
+        }
+
+        #suggestions div:hover {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="text-align:center; margin-top:40px;">
+        <h1>Movie Recommendation System</h1>
+    </div>
+
+    <div class="search-box" style="text-align:center;">
+        
+        <form action="/recommend" method="POST">
+            
+            <p style="font-size:18px;">Search your favorite movie </p>
+            
+            <!-- ✅ ONLY FIX: added id -->
+            <input 
+                type="text" 
+                id="searchBox"
+                name="title"
+                placeholder="e.g. Inception, Avengers..."
+                required
+                autocomplete="off"
+                spellcheck="false"
+            >
+
+            <!-- ✅ ONLY ADD: suggestion box -->
+            <div id="suggestions" style="max-width:320px; margin:0 auto;"></div>
+
+            <br><br>
+
+            <button type="submit">
+                🔍 Get Recommendations
+            </button>
+
+        </form>
+    </div>
+
+</body>
+</html>
+
+<!-- ✅ ONLY ADD: JS (no other changes) -->
+<script>
+const input = document.getElementById("searchBox");
+const box = document.getElementById("suggestions");
+
+input.addEventListener("input", async function () {
+    let q = input.value.trim();
+
+    if (q.length < 1) {
+        box.innerHTML = "";
+        return;
+    }
+
+    let res = await fetch(`/search_suggestions?q=${q}`);
+    let data = await res.json();
+
+    box.innerHTML = "";
+
+    data.results.forEach(movie => {
+        let div = document.createElement("div");
+
+        div.innerHTML = movie;
+
+        div.onclick = () => {
+            input.value = movie;
+            box.innerHTML = "";
+        };
+
+        box.appendChild(div);
+    });
+});
+</script>

@@ -1,0 +1,46 @@
+/* ---------- Background ---------- */
+body { 
+  background: url('home-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+/* ---------- Heading ---------- */
+h1 { 
+  text-align: center;
+  margin: 20px 0;
+  color: #e50914;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+/* ---------- Page Layout ---------- */
+.page {
+  margin: 3.5% 0 0 2.5%;
+  padding: 20px;
+}
+
+/* ---------- Movie Grid ---------- */
+.page div {
+  transition: transform 0.3s ease;
+}
+
+/* ---------- Movie Posters ---------- */
+.page img {
+  padding: 7px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect (Netflix style) */
+.page img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+/* ---------- Movie Title ---------- */
+.page p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #ccc;
+}

@@ -1,0 +1,93 @@
+/* ---------- Background ---------- */
+body {
+    background: url('../stylesheets/home-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ---------- Logo ---------- */
+img {
+    width: 140px;
+    height: auto;
+}
+
+/* ---------- Content ---------- */
+.content {
+    text-align: center;
+    margin-top: 100px;
+}
+
+/* ---------- Heading ---------- */
+h1 {
+    color: #e50914;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+/* ---------- Input Label ---------- */
+p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* ---------- Input Field ---------- */
+input {
+    padding: 12px;
+    width: 300px;
+    background-color: #000;
+    color: white;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* ---------- Button ---------- */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f6121d;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    input {
+        width: 250px;
+    }
+}
+
+input::-webkit-calendar-picker-indicator {
+    display: none !important;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input::-webkit-credentials-auto-fill-button {
+    display: none !important;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+input::-ms-reveal {
+    display: none;
+}

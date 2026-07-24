@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{movie['title']}}</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* 🎥 BLUR BACKGROUND */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("{{poster}}") no-repeat center center/cover;
+            filter: blur(18px) brightness(0.5);
+            z-index: -1;
+        }
+
+        body {
+            animation: fadePage 1s ease-in;
+        }
+
+        @keyframes fadePage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            padding: 8px 14px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            height: 100vh;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .left-column img {
+            width: 260px;
+            height: 400px;
+            border-radius: 12px;
+            animation: slideLeft 1s ease;
+            transition: transform 0.5s ease;
+        }
+
+        .left-column img:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .right-column {
+            max-width: 500px;
+            animation: slideRight 1s ease;
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .movie-description h2 {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.3),
+                0 0 25px rgba(255,255,255,0.2),
+                0 5px 15px rgba(0,0,0,0.9);
+            animation: titleFade 1s ease;
+        }
+
+        @keyframes titleFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .movie-description p {
+            line-height: 1.6;
+            opacity: 0.9;
+            max-width: 450px;
+        }
+
+        .movie-details {
+            margin-top: 20px;
+        }
+
+        .watch-btn {
+            margin-top: 25px;
+            padding: 14px 28px;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .watch-btn:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(229,9,20,0.7);
+            background: #b20710;
+        }
+
+        /* AI SECTION */
+        .ai-section {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        .ai-movies {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .ai-movie {
+            width: 120px;
+        }
+
+        .ai-movie img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .ai-movie p {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BACK BUTTON -->
+    <button onclick="history.back()" class="back-btn">
+        ⬅ Back
+    </button>
+
+    <div class="container">
+
+        <!-- LEFT -->
+        <div class="left-column">
+            <img src="{{poster}}">
+        </div>
+
+        <!-- RIGHT -->
+        <div class="right-column">
+
+            <div class="movie-description">
+
+                <h2>
+                   {{ movie['title'] }}
+
+                   {% if movie['release_date'] %}
+                        {% set date = movie['release_date']|string %}
+                        {% set year = date.split('-')[-1] %}
+
+                        <span style="font-size:20px; opacity:0.7;">
+                           ({{ year if year.isdigit() else date[:4] }})
+                        </span>
+                    {% endif %}
+                </h2>
+
+                <p>{{movie['overview']}}</p>
+            </div>
+
+            <div class="movie-details">
+                <p><b>Rating:</b> {{movie['vote_average']}}</p>
+                <p><b>Release Date:</b> {{movie['release_date']}}</p>
+                <p><b>Language:</b> {{movie['original_language']}}</p>
+            </div>
+
+            <a href="https://www.netflix.com/search?q={{ movie['title'] }}" target="_blank">
+                <button class="watch-btn">▶ Watch on Netflix</button>
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- AI SECTION (NO GEMINI) -->
+    <div class="ai-section">
+
+        {% if ai_suggestions and ai_suggestions|length > 0 %}
+            <h3>🤖 AI Suggested Movies</h3>
+
+            <div class="ai-movies">
+                {% for i in range(ai_suggestions|length) %}
+                    <div class="ai-movie">
+                        <img src="{{ ai_posters[i] }}">
+                        <p>{{ ai_suggestions[i] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
